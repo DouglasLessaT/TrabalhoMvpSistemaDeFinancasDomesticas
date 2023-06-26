@@ -3,8 +3,6 @@ package br.com.sfd.mvp.application;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +17,7 @@ import br.com.sfd.mvp.entities.ProspeccaoPanel;
 import br.com.sfd.mvp.entities.RendaMensal;
 import br.com.sfd.mvp.entities.RendaMensalPanel;
 import br.com.sfd.mvp.entities.UsuarioPanel;
+import javax.swing.JPanel;
 
 public class MainProgram {
 
@@ -48,7 +47,7 @@ public class MainProgram {
 
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 1280, 800);
+        frame.setBounds(100, 100, 1090, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
@@ -103,6 +102,10 @@ public class MainProgram {
 
         btnUsuario.setBounds(850, 10, 200, 23);
         frame.getContentPane().add(btnUsuario);
+        
+        JPanel panel = new JPanel();
+        panel.setBounds(10, 44, 1040, 506);
+        frame.getContentPane().add(panel);
     }
 /*    private static void criarArquivo() {
         try {
@@ -119,11 +122,12 @@ public class MainProgram {
     }
 */
     private void exibirLancamentosPanel() {
+    	
         JFrame lancamentosFrame = new JFrame("Lançamentos de Gastos");
         lancamentosFrame.setSize(1280, 800);
 
         LancamentosGastosPanel lancamentosPanel = new LancamentosGastosPanel(lancamentos);
-        lancamentosFrame.add(lancamentosPanel);
+        lancamentosFrame.getContentPane().add(lancamentosPanel);
 
         lancamentosFrame.setVisible(true);
     }
@@ -143,7 +147,7 @@ public class MainProgram {
         JFrame contaFrame = new JFrame("Conta");
         contaFrame.setSize(1280, 800);
         ContaPanel contaPanel = new ContaPanel();
-        contaFrame.add(contaPanel);
+        contaFrame.getContentPane().add(contaPanel);
 
         contaFrame.setVisible(true);
     }
@@ -153,7 +157,7 @@ public class MainProgram {
         rendaMensalFrame.setSize(1000, 800);
 
         RendaMensalPanel rendaMensalPanel = new RendaMensalPanel(rendaMensalList);
-        rendaMensalFrame.add(rendaMensalPanel);
+        rendaMensalFrame.getContentPane().add(rendaMensalPanel);
 
         rendaMensalFrame.setVisible(true);
     }
@@ -164,7 +168,7 @@ public class MainProgram {
 
         Prospeccao prospeccao = new Prospeccao(1, "Descrição da Prospecção", 1000.0f, 12);
         ProspeccaoPanel prospeccaoPanel = new ProspeccaoPanel(prospeccao);
-        prospeccaoFrame.add(prospeccaoPanel);
+        prospeccaoFrame.getContentPane().add(prospeccaoPanel);
 
         prospeccaoFrame.setVisible(true);
     }
