@@ -1,4 +1,4 @@
-package br.com.sfd.mvp.interfaceGrafica;
+package br.com.sfd.mvp.application;
 
 import java.awt.Color;
 import java.awt.EventQueue;
