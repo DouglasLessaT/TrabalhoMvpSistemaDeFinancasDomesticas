@@ -100,20 +100,7 @@ public class MainProgram {
         frame.getContentPane().add(mainPanel);
         frame.setVisible(true);
     }
-/*    private static void criarArquivo() {
-        try {
-            File myObj = new File("filename.txt");
-            if (myObj.createNewFile()) {
-                System.out.println("Arquivo criado: " + myObj.getName());
-            } else {
-                System.out.println("O arquivo já existe.");
-            }
-        } catch (IOException e) {
-            System.out.println("Ocorreu um erro ao criar o arquivo.");
-            e.printStackTrace();
-        }
-    }
-*/
+
     private void exibirLancamentosPanel() {
         JFrame lancamentosFrame = new JFrame("Lançamentos de Gastos");
         lancamentosFrame.setSize(1280, 800);

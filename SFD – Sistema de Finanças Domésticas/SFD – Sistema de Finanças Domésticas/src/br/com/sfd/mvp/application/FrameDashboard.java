@@ -15,9 +15,9 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
-import br.com.sfd.mvp.panels.PanelCustomers;
-import br.com.sfd.mvp.panels.PanelHome;
-import br.com.sfd.mvp.panels.PanelOrders;
+import br.com.sfd.mvp.panels.PanelSpendingBids;
+import br.com.sfd.mvp.panels.PanelAccont;
+import br.com.sfd.mvp.panels.PanelMonthlyIncome;
 import br.com.sfd.mvp.panels.PanelProfits;
 import br.com.sfd.mvp.panels.PanelSetting;
 
@@ -26,12 +26,13 @@ public class FrameDashboard extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Image iconImage = new ImageIcon( FrameDashboard.class.getResource("/res/bank.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
+
+	private Image iconImage = new ImageIcon( FrameDashboard.class.getResource("/br/com/sfd/mvp/res/bank.png")).getImage().getScaledInstance(90, 90, Image.SCALE_SMOOTH);
 	
-	private PanelHome panelHome;
+	private PanelAccont panelAccont;
 	private PanelProfits panelProfits;
-	private PanelOrders panelOrders;
-	private PanelCustomers panelCustomers;
+	private PanelMonthlyIncome panelMonthlyIncome;
+	private PanelSpendingBids panelSpendingBids;
 	private PanelSetting panelSetting;
 	
 	public static void main(String[] args) {
@@ -55,20 +56,19 @@ public class FrameDashboard extends JFrame {
 		setLocationRelativeTo(null);
 		
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(17, 65, 83));
+		contentPane.setBackground(new Color(17, 65, 82));
 		contentPane.setForeground(new Color(46, 138, 153));
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-	    panelHome = new PanelHome();
+	    panelAccont = new PanelAccont();
+	    panelAccont.setBackground(new Color(17, 65, 83));
 	    panelProfits = new PanelProfits(); 
-	    panelOrders = new PanelOrders();
-	    panelCustomers = new PanelCustomers();
-	    panelSetting = new PanelSetting();
-	    
-		
+	    panelMonthlyIncome = new PanelMonthlyIncome();
+	    panelSpendingBids = new PanelSpendingBids();
+	    panelSetting = new PanelSetting();	    		
 		
 		JPanel panemenu = new JPanel();
 		panemenu.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -83,25 +83,25 @@ public class FrameDashboard extends JFrame {
 		lblIconLogo.setIcon(new ImageIcon(iconImage));;
 		panemenu.add(lblIconLogo);
 		
-		JPanel paneHome = new JPanel();
-		paneHome.addMouseListener(new PanelButtonMouseAdapter(paneHome){
+		JPanel paneAccont = new JPanel();
+		paneAccont.addMouseListener(new PanelButtonMouseAdapter(paneAccont){
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				menuClicked(panelHome);
+				menuClicked(panelAccont);
 			}
 		});
-		paneHome.setBackground(new Color(31, 110, 140));
-		paneHome.setBounds(1, 173, 260, 34);
-		panemenu.add(paneHome);
-		paneHome.setLayout(null);
+		paneAccont.setBackground(new Color(31, 110, 140));
+		paneAccont.setBounds(1, 173, 260, 34);
+		panemenu.add(paneAccont);
+		paneAccont.setLayout(null);
 		
 		JLabel lblConta = new JLabel("Conta");
 		lblConta.setForeground(new Color(192, 192, 192));
 		lblConta.setFont(new Font("Impact", Font.PLAIN, 14));
 		lblConta.setBounds(70, 10, 116, 14);
 		lblConta.setHorizontalAlignment(SwingConstants.LEFT);
-		paneHome.add(lblConta);
+		paneAccont.add(lblConta);
 		
 		JPanel paneProfits = new JPanel();
 		paneProfits.addMouseListener(new PanelButtonMouseAdapter(paneProfits){
@@ -115,50 +115,50 @@ public class FrameDashboard extends JFrame {
 		panemenu.add(paneProfits);
 		paneProfits.setLayout(null);
 		
-		JLabel lblProspec = new JLabel("Prospecção");
-		lblProspec.setForeground(new Color(192, 192, 192));
-		lblProspec.setHorizontalAlignment(SwingConstants.LEFT);
-		lblProspec.setFont(new Font("Impact", Font.PLAIN, 14));
-		lblProspec.setBounds(70, 11, 116, 14);
-		paneProfits.add(lblProspec);
+		JLabel lblProfits = new JLabel("Prospecção");
+		lblProfits.setForeground(new Color(192, 192, 192));
+		lblProfits.setHorizontalAlignment(SwingConstants.LEFT);
+		lblProfits.setFont(new Font("Impact", Font.PLAIN, 14));
+		lblProfits.setBounds(70, 11, 116, 14);
+		paneProfits.add(lblProfits);
 		
-		JPanel paneOrders = new JPanel();
-		paneOrders.addMouseListener(new PanelButtonMouseAdapter(paneOrders){
+		JPanel paneMonthlyIncome = new JPanel();
+		paneMonthlyIncome.addMouseListener(new PanelButtonMouseAdapter(paneMonthlyIncome){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				menuClicked(panelOrders);
+				menuClicked(panelMonthlyIncome);
 			}
 		});
-		paneOrders.setBackground(new Color(31, 110, 140));
-		paneOrders.setBounds(1, 237, 260, 34);
-		panemenu.add(paneOrders);
-		paneOrders.setLayout(null);
+		paneMonthlyIncome.setBackground(new Color(31, 110, 140));
+		paneMonthlyIncome.setBounds(1, 237, 260, 34);
+		panemenu.add(paneMonthlyIncome);
+		paneMonthlyIncome.setLayout(null);
 		
 		JLabel lblRendaMensal = new JLabel("Renda Mensal");
 		lblRendaMensal.setForeground(new Color(192, 192, 192));
 		lblRendaMensal.setHorizontalAlignment(SwingConstants.LEFT);
 		lblRendaMensal.setFont(new Font("Impact", Font.PLAIN, 14));
 		lblRendaMensal.setBounds(70, 10, 116, 14);
-		paneOrders.add(lblRendaMensal);
+		paneMonthlyIncome.add(lblRendaMensal);
 		
-		JPanel paneCustomers = new JPanel();
-		paneCustomers.addMouseListener(new PanelButtonMouseAdapter(paneCustomers){
+		JPanel paneSpendingBids = new JPanel();
+		paneSpendingBids.addMouseListener(new PanelButtonMouseAdapter(paneSpendingBids){
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				menuClicked(panelCustomers);
+				menuClicked(panelSpendingBids);
 			}
 		});
-		paneCustomers.setBackground(new Color(31, 110, 140));
-		paneCustomers.setBounds(1, 269, 260, 34);
-		panemenu.add(paneCustomers);
-		paneCustomers.setLayout(null);
+		paneSpendingBids.setBackground(new Color(31, 110, 140));
+		paneSpendingBids.setBounds(1, 269, 260, 34);
+		panemenu.add(paneSpendingBids);
+		paneSpendingBids.setLayout(null);
 		
 		JLabel lblLancamentoGastos = new JLabel("Lancamento gastos");
 		lblLancamentoGastos.setForeground(new Color(192, 192, 192));
 		lblLancamentoGastos.setHorizontalAlignment(SwingConstants.LEFT);
 		lblLancamentoGastos.setFont(new Font("Impact", Font.PLAIN, 14));
 		lblLancamentoGastos.setBounds(70, 10, 116, 14);
-		paneCustomers.add(lblLancamentoGastos);
+		paneSpendingBids.add(lblLancamentoGastos);
 		
 		JPanel paneSetting = new JPanel();
 		paneSetting.addMouseListener(new PanelButtonMouseAdapter(paneSetting){
@@ -229,25 +229,26 @@ public class FrameDashboard extends JFrame {
 		contentPane.add(lblExit);
 		
 		JPanel paneMainContent = new JPanel();
+		paneMainContent.setBackground(new Color(17, 65, 83));
 		paneMainContent.setBounds(272, 21, 787, 468);
 		contentPane.add(paneMainContent);
 	    paneMainContent.setLayout(null);
 		
-	    paneMainContent.add(panelHome);
+	    paneMainContent.add(panelAccont);
 	    
 	    paneMainContent.add(panelProfits);
-	    paneMainContent.add(panelOrders);
-	    paneMainContent.add(panelCustomers);
+	    paneMainContent.add(panelMonthlyIncome);
+	    paneMainContent.add(panelSpendingBids);
 	    paneMainContent.add(panelSetting);
 	    
-	    menuClicked(panelHome);
+	    menuClicked(panelAccont);
 	}
 	
 	public void menuClicked(JPanel panel) {
-		panelHome.setVisible(false);
+		panelAccont.setVisible(false);
 		panelProfits.setVisible(false);
-		panelOrders.setVisible(false);
-		panelCustomers.setVisible(false);
+		panelMonthlyIncome.setVisible(false);
+		panelSpendingBids.setVisible(false);
 		panelSetting.setVisible(false);
 
 		panel.setVisible(true);
