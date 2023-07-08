@@ -13,11 +13,11 @@ public class LancamentosGastos implements Serializable {
     private Date dataGasto;
     private String quantidadePorConsumo;
 
-    private List<LancamentosGastos> valoresGastos = new ArrayList<>();
-    private List<LancamentosGastos> datasGastos = new ArrayList<>();
-    private List<LancamentosGastos> quantidadesPorConsumos = new ArrayList<>();
+    private static final String ARQUIVO_LANCAMENTOS = "lancamentos.dat";
+    private static List<LancamentosGastos> lancamentosList;
 
     public LancamentosGastos() {
+        lancamentosList = new ArrayList<>();
     }
 
     public LancamentosGastos(int idLancamentosGerais, float valorGasto, Date dataGasto, String quantidadePorConsumo) {
@@ -59,70 +59,57 @@ public class LancamentosGastos implements Serializable {
         this.quantidadePorConsumo = quantidadePorConsumo;
     }
 
-    public List<LancamentosGastos> getValoresGastos() {
-        return valoresGastos;
+    public void salvarLancamento() {
+        lancamentosList.add(this);
+        salvarListaLancamentos();
     }
 
-    public void salvarValoresGastos(String arquivo) {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(arquivo))) {
-            outputStream.writeObject(valoresGastos);
+    public static List<LancamentosGastos> getLancamentos() {
+        carregarListaLancamentos();
+        return lancamentosList;
+    }
+
+    public static LancamentosGastos buscarLancamentoPorId(int id) {
+        carregarListaLancamentos();
+        for (LancamentosGastos lancamento : lancamentosList) {
+            if (lancamento.getIdLancamentosGerais() == id) {
+                return lancamento;
+            }
+        }
+        return null;
+    }
+
+    public void atualizarLancamento() {
+        carregarListaLancamentos();
+        for (int i = 0; i < lancamentosList.size(); i++) {
+            if (lancamentosList.get(i).getIdLancamentosGerais() == this.idLancamentosGerais) {
+                lancamentosList.set(i, this);
+                salvarListaLancamentos();
+                return;
+            }
+        }
+    }
+
+    public void excluirLancamento() {
+        carregarListaLancamentos();
+        lancamentosList.removeIf(lancamento -> lancamento.getIdLancamentosGerais() == this.idLancamentosGerais);
+        salvarListaLancamentos();
+    }
+
+    private static void salvarListaLancamentos() {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(ARQUIVO_LANCAMENTOS))) {
+            outputStream.writeObject(lancamentosList);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void carregarValoresGastos(String arquivo) {
-        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(arquivo))) {
-            valoresGastos = (List<LancamentosGastos>) inputStream.readObject();
+    private static LancamentosGastos carregarListaLancamentos() {
+        try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(ARQUIVO_LANCAMENTOS))) {
+            return (LancamentosGastos) inputStream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            lancamentosList = new ArrayList<>();
+            return null;
         }
-    }
-
-    public void criarValorGasto(LancamentosGastos valorGasto) {
-        valoresGastos.add(valorGasto);
-        salvarValoresGastos("valores_gastos.dat");
-    }
-
-    public void deletarValorGasto(LancamentosGastos valorGasto) {
-        valoresGastos.remove(valorGasto);
-        salvarValoresGastos("valores_gastos.dat");
-    }
-
-    public void alterarValorGasto(int index, LancamentosGastos newValorGasto) {
-        valoresGastos.set(index, newValorGasto);
-        salvarValoresGastos("valores_gastos.dat");
-    }
-
-    public List<LancamentosGastos> getDatasGastos() {
-        return datasGastos;
-    }
-
-    public void criarDataGasto(LancamentosGastos dataGasto) {
-        datasGastos.add(dataGasto);
-    }
-
-    public void deletarDataGasto(LancamentosGastos dataGasto) {
-        datasGastos.remove(dataGasto);
-    }
-
-    public void alterarDataGasto(int index, LancamentosGastos newDataGasto) {
-        datasGastos.set(index, newDataGasto);
-    }
-
-    public List<LancamentosGastos> getQuantidadesPorConsumos() {
-        return quantidadesPorConsumos;
-    }
-
-    public void criarQuantidadePorConsumo(LancamentosGastos quantidadePorConsumo) {
-        quantidadesPorConsumos.add(quantidadePorConsumo);
-    }
-
-    public void deletarQuantidadePorConsumo(LancamentosGastos quantidadePorConsumo) {
-        quantidadesPorConsumos.remove(quantidadePorConsumo);
-    }
-
-    public void alterarQuantidadePorConsumo(int index, LancamentosGastos newQuantidadePorConsumo) {
-        quantidadesPorConsumos.set(index, newQuantidadePorConsumo);
     }
 }

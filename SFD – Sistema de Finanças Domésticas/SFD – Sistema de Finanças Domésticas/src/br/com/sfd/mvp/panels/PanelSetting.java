@@ -1,25 +1,32 @@
 package br.com.sfd.mvp.panels;
 
+import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import java.awt.Color;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 public class PanelSetting extends JPanel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8754064385170323836L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
 
-	public PanelSetting() {
+	private static final long serialVersionUID = -8754064385170323836L;
+	private JTextField textFielddUsuario;
+	private JTextField textFieldNomeUsuario;
+	private JTextField textFieldSenhaUsuario;
+	private JTextField textFieldSenhaUsuarioC;
+	
+    private JPanel paneInserir;
+    private JPanel paneDeletar;
+    private JPanel paneVer;
+
+    
+    
+    public PanelSetting() {
+        
 		setBackground(new Color(17, 65, 82));
 		setBounds(1, 1, 780, 464);
 		setLayout(null);
@@ -41,15 +48,15 @@ public class PanelSetting extends JPanel {
 		lblIdUsuario.setBounds(10, 16, 151, 14);
 		paneinformacoes.add(lblIdUsuario);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(171, 11, 98, 20);
-		paneinformacoes.add(textField);
+		textFielddUsuario = new JTextField();
+		textFielddUsuario.setColumns(10);
+		textFielddUsuario.setBounds(171, 11, 98, 20);
+		paneinformacoes.add(textFielddUsuario);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(171, 42, 98, 20);
-		paneinformacoes.add(textField_1);
+		textFieldNomeUsuario = new JTextField();
+		textFieldNomeUsuario.setColumns(10);
+		textFieldNomeUsuario.setBounds(171, 42, 98, 20);
+		paneinformacoes.add(textFieldNomeUsuario);
 		
 		JLabel lblValorRendaMensal = new JLabel("Nome Usuario:");
 		lblValorRendaMensal.setForeground(Color.LIGHT_GRAY);
@@ -57,29 +64,29 @@ public class PanelSetting extends JPanel {
 		lblValorRendaMensal.setBounds(10, 47, 151, 14);
 		paneinformacoes.add(lblValorRendaMensal);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(461, 11, 98, 20);
-		paneinformacoes.add(textField_2);
+		textFieldSenhaUsuario = new JTextField();
+		textFieldSenhaUsuario.setColumns(10);
+		textFieldSenhaUsuario.setBounds(461, 11, 98, 20);
+		paneinformacoes.add(textFieldSenhaUsuario);
 		
-		JLabel lblDataRendamensal = new JLabel(" Senha:");
-		lblDataRendamensal.setForeground(Color.LIGHT_GRAY);
-		lblDataRendamensal.setFont(new Font("Impact", Font.PLAIN, 15));
-		lblDataRendamensal.setBounds(279, 15, 172, 14);
-		paneinformacoes.add(lblDataRendamensal);
+		JLabel lblSenhaUsuario = new JLabel(" Senha:");
+		lblSenhaUsuario.setForeground(Color.LIGHT_GRAY);
+		lblSenhaUsuario.setFont(new Font("Impact", Font.PLAIN, 15));
+		lblSenhaUsuario.setBounds(279, 15, 172, 14);
+		paneinformacoes.add(lblSenhaUsuario);
 		
-		textField_3 = new JTextField();
-		textField_3.setText("\r\n");
-		textField_3.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_3.setColumns(10);
-		textField_3.setBounds(461, 43, 263, 20);
-		paneinformacoes.add(textField_3);
+		textFieldSenhaUsuarioC = new JTextField();
+		textFieldSenhaUsuarioC.setText("\r\n");
+		textFieldSenhaUsuarioC.setHorizontalAlignment(SwingConstants.LEFT);
+		textFieldSenhaUsuarioC.setColumns(10);
+		textFieldSenhaUsuarioC.setBounds(461, 43, 263, 20);
+		paneinformacoes.add(textFieldSenhaUsuarioC);
 		
-		JLabel lblDescricaoRendamensal = new JLabel("Confirmar senha : ");
-		lblDescricaoRendamensal.setForeground(Color.LIGHT_GRAY);
-		lblDescricaoRendamensal.setFont(new Font("Impact", Font.PLAIN, 15));
-		lblDescricaoRendamensal.setBounds(279, 48, 172, 14);
-		paneinformacoes.add(lblDescricaoRendamensal);
+		JLabel lblSenhaUsuarioC = new JLabel("Confirmar senha : ");
+		lblSenhaUsuarioC.setForeground(Color.LIGHT_GRAY);
+		lblSenhaUsuarioC.setFont(new Font("Impact", Font.PLAIN, 15));
+		lblSenhaUsuarioC.setBounds(279, 48, 172, 14);
+		paneinformacoes.add(lblSenhaUsuarioC);
 		
 		JPanel paneMenuHome = new JPanel();
 		paneMenuHome.setLayout(null);
@@ -87,50 +94,123 @@ public class PanelSetting extends JPanel {
 		paneMenuHome.setBounds(10, 11, 760, 42);
 		add(paneMenuHome);
 		
-		JPanel paneInserirUsuario = new JPanel();
-		paneInserirUsuario.setToolTipText("");
-		paneInserirUsuario.setBackground(new Color(17, 65, 82));
-		paneInserirUsuario.setBounds(10, 5, 151, 30);
-		paneMenuHome.add(paneInserirUsuario);
+		JPanel paneInserir = new JPanel();
+		paneInserir.addMouseListener(new PanelButtonMouseAdapter(paneInserir) {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		paneInserir.setToolTipText("");
+		paneInserir.setBackground(new Color(17, 65, 82));
+		paneInserir.setBounds(10, 5, 151, 30);
+		paneMenuHome.add(paneInserir);
 		
 		JLabel lblInserirUsuario = new JLabel("Inserir ");
 		lblInserirUsuario.setForeground(Color.LIGHT_GRAY);
 		lblInserirUsuario.setFont(new Font("Impact", Font.PLAIN, 15));
-		paneInserirUsuario.add(lblInserirUsuario);
+		paneInserir.add(lblInserirUsuario);
 		
-		JPanel paneDeletarUsuario = new JPanel();
-		paneDeletarUsuario.setToolTipText("");
-		paneDeletarUsuario.setBackground(new Color(17, 65, 82));
-		paneDeletarUsuario.setBounds(171, 5, 151, 30);
-		paneMenuHome.add(paneDeletarUsuario);
+		JPanel paneDeletar = new JPanel();
+		paneDeletar.addMouseListener(new PanelButtonMouseAdapter(paneDeletar) {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		paneDeletar.setToolTipText("");
+		paneDeletar.setBackground(new Color(17, 65, 82));
+		paneDeletar.setBounds(171, 5, 151, 30);
+		paneMenuHome.add(paneDeletar);
 		
 		JLabel lblDeletarUsuario = new JLabel("Deletar");
 		lblDeletarUsuario.setForeground(Color.LIGHT_GRAY);
 		lblDeletarUsuario.setFont(new Font("Impact", Font.PLAIN, 15));
-		paneDeletarUsuario.add(lblDeletarUsuario);
+		paneDeletar.add(lblDeletarUsuario);
 		
-		JPanel paneAlterarUsuario = new JPanel();
-		paneAlterarUsuario.setToolTipText("");
-		paneAlterarUsuario.setBackground(new Color(17, 65, 82));
-		paneAlterarUsuario.setBounds(332, 5, 151, 30);
-		paneMenuHome.add(paneAlterarUsuario);
+		JPanel paneAlterar = new JPanel();
+		paneAlterar.addMouseListener(new PanelButtonMouseAdapter(paneDeletar) {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		paneAlterar.setToolTipText("");
+		paneAlterar.setBackground(new Color(17, 65, 82));
+		paneAlterar.setBounds(332, 5, 151, 30);
+		paneMenuHome.add(paneAlterar);
 		
 		JLabel lblAlterarUsuario = new JLabel("Alterar ");
 		lblAlterarUsuario.setForeground(Color.LIGHT_GRAY);
 		lblAlterarUsuario.setFont(new Font("Impact", Font.PLAIN, 15));
-		paneAlterarUsuario.add(lblAlterarUsuario);
+		paneAlterar.add(lblAlterarUsuario);
 		
-		JPanel paneVerUsuario = new JPanel();
-		paneVerUsuario.setToolTipText("");
-		paneVerUsuario.setBackground(new Color(17, 65, 82));
-		paneVerUsuario.setBounds(493, 5, 151, 30);
-		paneMenuHome.add(paneVerUsuario);
+		JPanel paneVer = new JPanel();
+		paneVer.addMouseListener(new PanelButtonMouseAdapter(paneVer) {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		paneVer.setToolTipText("");
+		paneVer.setBackground(new Color(17, 65, 82));
+		paneVer.setBounds(493, 5, 151, 30);
+		paneMenuHome.add(paneVer);
 		
 		JLabel lblVerUsuario = new JLabel("Ver");
 		lblVerUsuario.setForeground(Color.LIGHT_GRAY);
 		lblVerUsuario.setFont(new Font("Impact", Font.PLAIN, 15));
-		paneVerUsuario.add(lblVerUsuario);
+		paneVer.add(lblVerUsuario);
 		setVisible(true);
 	}
+	
+    public void menuClicked(JPanel panel) {
+        if (panel == paneInserir) {
+            inserirUsuario();
+        } else if (panel == paneDeletar) {
+            deletarUsuario();
+        } else if (panel == paneVer) {
+            verUsuario();
+        }
+    }
+    private void inserirUsuario() {
+   
+    }
+    private void deletarUsuario() {
 
+    }
+
+    private void verUsuario() {
+
+    }
+
+    
+    private class PanelButtonMouseAdapter extends MouseAdapter {
+
+        JPanel panel;
+
+        public PanelButtonMouseAdapter(JPanel panel) {
+            this.panel = panel;
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            panel.setBackground(new Color(112, 128, 144));
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            panel.setBackground(new Color(17, 65, 82));
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            panel.setBackground(new Color(60, 179, 113));
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            panel.setBackground(new Color(17, 65, 82));
+        }
+
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        }
+    }
 }

@@ -1,28 +1,32 @@
 package br.com.sfd.mvp.panels;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
 import java.awt.Color;
-import javax.swing.JTextField;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import br.com.sfd.mvp.entities.LancamentosGastos;
 
 public class PanelSpendingBids extends JPanel {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+    private JTextField textFieldIdLacamentosG;
+    private JTextField textFieldValorLacamentosg;
+    private JTextField textFieldDataRendamensal;
+    private JTextField textFieldQuantidadeLacamentosG;
 
-	/**
-	 * Create the panel.
-	 */
+    private JPanel paneInserir;
+    private JPanel paneDeletar;
+    private JPanel paneAlterar;
+    private JPanel paneVer;
+    
 	public PanelSpendingBids() {
 		setBackground(new Color(17, 65, 82));
 		setBounds(1, 1, 780, 464);
@@ -40,15 +44,15 @@ public class PanelSpendingBids extends JPanel {
 		lblIdLacamentosG.setBounds(10, 16, 151, 14);
 		paneinformacoes.add(lblIdLacamentosG);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBounds(171, 11, 98, 20);
-		paneinformacoes.add(textField);
+		textFieldIdLacamentosG = new JTextField();
+		textFieldIdLacamentosG.setColumns(10);
+		textFieldIdLacamentosG.setBounds(171, 11, 98, 20);
+		paneinformacoes.add(textFieldIdLacamentosG);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(171, 42, 98, 20);
-		paneinformacoes.add(textField_1);
+		textFieldValorLacamentosg = new JTextField();
+		textFieldValorLacamentosg.setColumns(10);
+		textFieldValorLacamentosg.setBounds(171, 42, 98, 20);
+		paneinformacoes.add(textFieldValorLacamentosg);
 		
 		JLabel lblValorLacamentosg = new JLabel("Valor LacamentosG:");
 		lblValorLacamentosg.setForeground(Color.LIGHT_GRAY);
@@ -56,10 +60,10 @@ public class PanelSpendingBids extends JPanel {
 		lblValorLacamentosg.setBounds(10, 47, 151, 14);
 		paneinformacoes.add(lblValorLacamentosg);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(461, 11, 98, 20);
-		paneinformacoes.add(textField_2);
+		textFieldDataRendamensal = new JTextField();
+		textFieldDataRendamensal.setColumns(10);
+		textFieldDataRendamensal.setBounds(461, 11, 98, 20);
+		paneinformacoes.add(textFieldDataRendamensal);
 		
 		JLabel lblDataRendamensal = new JLabel("Data RendaMensal:");
 		lblDataRendamensal.setForeground(Color.LIGHT_GRAY);
@@ -67,12 +71,12 @@ public class PanelSpendingBids extends JPanel {
 		lblDataRendamensal.setBounds(279, 15, 172, 14);
 		paneinformacoes.add(lblDataRendamensal);
 		
-		textField_3 = new JTextField();
-		textField_3.setText("\r\n");
-		textField_3.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_3.setColumns(10);
-		textField_3.setBounds(461, 43, 263, 20);
-		paneinformacoes.add(textField_3);
+		textFieldQuantidadeLacamentosG = new JTextField();
+		textFieldQuantidadeLacamentosG.setText("\r\n");
+		textFieldQuantidadeLacamentosG.setHorizontalAlignment(SwingConstants.LEFT);
+		textFieldQuantidadeLacamentosG.setColumns(10);
+		textFieldQuantidadeLacamentosG.setBounds(461, 43, 263, 20);
+		paneinformacoes.add(textFieldQuantidadeLacamentosG);
 		
 		JLabel lblQuantidadeLacamentosG = new JLabel("Quantidade LacamentosG: ");
 		lblQuantidadeLacamentosG.setForeground(Color.LIGHT_GRAY);
@@ -86,80 +90,180 @@ public class PanelSpendingBids extends JPanel {
 		paneMenuHome.setBounds(10, 11, 760, 42);
 		add(paneMenuHome);
 		
-		JPanel paneInserirLacamentosG = new JPanel();
-		paneInserirLacamentosG.addMouseListener(new PanelButtonMouseAdapter(paneInserirLacamentosG) {
+		JPanel paneInserir = new JPanel();
+		paneInserir.addMouseListener(new PanelButtonMouseAdapter(paneInserir) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		paneInserirLacamentosG.setToolTipText("");
-		paneInserirLacamentosG.setBackground(new Color(17, 65, 82));
-		paneInserirLacamentosG.setBounds(10, 5, 151, 30);
-		paneMenuHome.add(paneInserirLacamentosG);
+		paneInserir.setToolTipText("");
+		paneInserir.setBackground(new Color(17, 65, 82));
+		paneInserir.setBounds(10, 5, 151, 30);
+		paneMenuHome.add(paneInserir);
 		
 		JLabel lblInserirLacamentosG = new JLabel("Inserir ");
 		lblInserirLacamentosG.setForeground(Color.LIGHT_GRAY);
 		lblInserirLacamentosG.setFont(new Font("Impact", Font.PLAIN, 15));
-		paneInserirLacamentosG.add(lblInserirLacamentosG);
+		paneInserir.add(lblInserirLacamentosG);
 		
-		JPanel paneDeletarLacamentosG = new JPanel();
-		paneDeletarLacamentosG.setToolTipText("");
-		paneDeletarLacamentosG.addMouseListener(new PanelButtonMouseAdapter(paneDeletarLacamentosG) {
+		JPanel paneDeletar = new JPanel();
+		paneDeletar.setToolTipText("");
+		paneDeletar.addMouseListener(new PanelButtonMouseAdapter(paneDeletar) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		paneDeletarLacamentosG.setBackground(new Color(17, 65, 82));
-		paneDeletarLacamentosG.setBounds(171, 5, 151, 30);
-		paneMenuHome.add(paneDeletarLacamentosG);
+		paneDeletar.setBackground(new Color(17, 65, 82));
+		paneDeletar.setBounds(171, 5, 151, 30);
+		paneMenuHome.add(paneDeletar);
 		
 		JLabel lblDeletarLacamentosG = new JLabel("Deletar");
 		lblDeletarLacamentosG.setForeground(Color.LIGHT_GRAY);
 		lblDeletarLacamentosG.setFont(new Font("Impact", Font.PLAIN, 15));
-		paneDeletarLacamentosG.add(lblDeletarLacamentosG);
+		paneDeletar.add(lblDeletarLacamentosG);
 		
-		JPanel paneAlterarLacamentosG = new JPanel();
-		paneAlterarLacamentosG.setToolTipText("");
-		paneAlterarLacamentosG.addMouseListener(new PanelButtonMouseAdapter(paneAlterarLacamentosG) {
+		JPanel paneAlterar = new JPanel();
+		paneAlterar.setToolTipText("");
+		paneAlterar.addMouseListener(new PanelButtonMouseAdapter(paneAlterar) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		paneAlterarLacamentosG.setBackground(new Color(17, 65, 82));
-		paneAlterarLacamentosG.setBounds(332, 5, 151, 30);
-		paneMenuHome.add(paneAlterarLacamentosG);
+		paneAlterar.setBackground(new Color(17, 65, 82));
+		paneAlterar.setBounds(332, 5, 151, 30);
+		paneMenuHome.add(paneAlterar);
 		
 		JLabel lblAlterarLacamentosG = new JLabel("Alterar ");
 		lblAlterarLacamentosG.setForeground(Color.LIGHT_GRAY);
 		lblAlterarLacamentosG.setFont(new Font("Impact", Font.PLAIN, 15));
-		paneAlterarLacamentosG.add(lblAlterarLacamentosG);
+		paneAlterar.add(lblAlterarLacamentosG);
 		
-		JPanel paneVerLacamentosG = new JPanel();
-		paneVerLacamentosG.setToolTipText("");
-		paneVerLacamentosG.addMouseListener(new PanelButtonMouseAdapter(paneVerLacamentosG) {
+		JPanel paneVer = new JPanel();
+		paneVer.setToolTipText("");
+		paneVer.addMouseListener(new PanelButtonMouseAdapter(paneVer) {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 			}
 		});
-		paneVerLacamentosG.setBackground(new Color(17, 65, 82));
-		paneVerLacamentosG.setBounds(493, 5, 151, 30);
-		paneMenuHome.add(paneVerLacamentosG);
+		paneVer.setBackground(new Color(17, 65, 82));
+		paneVer.setBounds(493, 5, 151, 30);
+		paneMenuHome.add(paneVer);
 		
 		JLabel lblVerLacamentosG = new JLabel("Ver");
 		lblVerLacamentosG.setForeground(Color.LIGHT_GRAY);
 		lblVerLacamentosG.setFont(new Font("Impact", Font.PLAIN, 15));
-		paneVerLacamentosG.add(lblVerLacamentosG);
+		paneVer.add(lblVerLacamentosG);
 		
-		JPanel paneTabela = new JPanel();
-		paneTabela.setLayout(null);
-		paneTabela.setBounds(10, 151, 760, 302);
-		add(paneTabela);
+		JPanel paneContent = new JPanel();
+		paneContent.setLayout(null);
+		paneContent.setBounds(10, 151, 760, 302);
+		add(paneContent);
 		setVisible(true);
 	}
-public void menuClicked(JPanel panel) {
-		
-		
+	public void menuClicked(JPanel panel) {
+	       if (panel == paneInserir) {
+	            inserirLacamentosG();
+	        } else if (panel == paneDeletar) {
+	            deletarLacamentosG();
+	        } else if (panel == paneAlterar) {
+	            alterarLacamentosG();
+	        } else if (panel == paneVer) {
+	            verLacamentosG();
+	        }
 	}
+	
+	private void inserirLacamentosG() {
+	    int idLancamentosG = Integer.parseInt(textFieldIdLacamentosG.getText());
+	    float valorLacamentosG = Float.parseFloat(textFieldValorLacamentosg.getText());
+	    Date dataRendaMensal = new Date();
+	    String quantidadeLacamentosG = textFieldQuantidadeLacamentosG.getText();
+
+	    // Criar um objeto LancamentosGastos com os dados fornecidos
+	    LancamentosGastos lancamentos = new LancamentosGastos(idLancamentosG, valorLacamentosG, dataRendaMensal, quantidadeLacamentosG);
+
+	    // Chamar o método para salvar o lançamento
+	    lancamentos.salvarLancamento();
+	    
+	    // Mostrar mensagem de confirmação
+	    JOptionPane.showMessageDialog(this, "Inserção concluída com sucesso!", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+
+	    // Limpar os campos de texto após a inserção
+	    textFieldIdLacamentosG.setText("");
+	    textFieldValorLacamentosg.setText("");
+	    textFieldDataRendamensal.setText("");
+	    textFieldQuantidadeLacamentosG.setText("");
+	}
+
+	private void deletarLacamentosG() {
+	    int idLancamentosG = Integer.parseInt(textFieldIdLacamentosG.getText());
+
+	    // Chamar o método para buscar o lançamento pelo ID
+	    LancamentosGastos lancamentos = LancamentosGastos.buscarLancamentoPorId(idLancamentosG);
+
+	    // Verificar se o lançamento foi encontrado e excluir se for o caso
+	    if (lancamentos != null) {
+	        lancamentos.excluirLancamento();
+	        // Mostrar mensagem de confirmação
+	        JOptionPane.showMessageDialog(this, "Exclusão concluída com sucesso!", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+
+	    }
+
+	    // Limpar os campos de texto após a exclusão
+	    textFieldIdLacamentosG.setText("");
+	    textFieldValorLacamentosg.setText("");
+	    textFieldDataRendamensal.setText("");
+	    textFieldQuantidadeLacamentosG.setText("");
+	}
+
+	private void alterarLacamentosG() {
+	    int idLancamentosG = Integer.parseInt(textFieldIdLacamentosG.getText());
+	    float valorLacamentosG = Float.parseFloat(textFieldValorLacamentosg.getText());
+	    Date dataRendaMensal = new Date();
+	    String quantidadeLacamentosG = textFieldQuantidadeLacamentosG.getText();
+
+	    // Chamar o método para buscar o lançamento pelo ID
+	    LancamentosGastos lancamentos = LancamentosGastos.buscarLancamentoPorId(idLancamentosG);
+	    
+	    // Mostrar mensagem de confirmação
+	    JOptionPane.showMessageDialog(this, "Atualização concluída com sucesso!", "Confirmação", JOptionPane.INFORMATION_MESSAGE);
+
+	    // Verificar se o lançamento foi encontrado e atualizar os dados se for o caso
+	    if (lancamentos != null) {
+	        lancamentos.setValorGasto(valorLacamentosG);
+	        lancamentos.setDataGasto(dataRendaMensal);
+	        lancamentos.setQuantidadePorConsumo(quantidadeLacamentosG);
+	        lancamentos.atualizarLancamento();
+	    }
+
+	    // Limpar os campos de texto após a atualização
+	    textFieldIdLacamentosG.setText("");
+	    textFieldValorLacamentosg.setText("");
+	    textFieldDataRendamensal.setText("");
+	    textFieldQuantidadeLacamentosG.setText("");
+	}
+
+	private void verLacamentosG() {
+	    int idLancamentosG = Integer.parseInt(textFieldIdLacamentosG.getText());
+
+	    // Chamar o método para buscar o lançamento pelo ID
+	    LancamentosGastos lancamentos = LancamentosGastos.buscarLancamentoPorId(idLancamentosG);
+
+	    // Preencher os campos de texto com os dados do lançamento encontrado
+	    if (lancamentos != null) {
+	        textFieldValorLacamentosg.setText(Float.toString(lancamentos.getValorGasto()));
+	        textFieldDataRendamensal.setText(formatDate(lancamentos.getDataGasto()));
+	        textFieldQuantidadeLacamentosG.setText(lancamentos.getQuantidadePorConsumo());
+	    } else {
+	        textFieldValorLacamentosg.setText("");
+	        textFieldDataRendamensal.setText("");
+	        textFieldQuantidadeLacamentosG.setText("");
+	    }
+	}
+	private String formatDate(Date date) {
+	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	    return sdf.format(date);
+	}
+	
 	private class PanelButtonMouseAdapter extends MouseAdapter{
 		
 		JPanel panel;

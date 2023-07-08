@@ -47,7 +47,6 @@ public class FrameDashboard extends JFrame {
 			}
 		});
 	}
-
 	public FrameDashboard() {
 		setBackground(new Color(47, 79, 79));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -161,12 +160,13 @@ public class FrameDashboard extends JFrame {
 		paneSpendingBids.add(lblLancamentoGastos);
 		
 		JPanel paneSetting = new JPanel();
-		paneSetting.addMouseListener(new PanelButtonMouseAdapter(paneSetting){
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				menuClicked(panelSetting);
-			}
-		});
+		paneSetting.addMouseListener(new PanelButtonMouseAdapter(paneSetting));
+//		paneSetting.addMouseListener(new PanelButtonMouseAdapter(paneSetting){
+//			@Override
+//			public void mouseClicked(MouseEvent e) {
+//				menuClicked(panelSetting);
+//			}
+//		});
 		paneSetting.setBackground(new Color(31, 110, 140));
 		paneSetting.setBounds(1, 301, 260, 34);
 		panemenu.add(paneSetting);
